@@ -6,7 +6,6 @@ from keras.datasets import mnist
 from keras.layers import merge, Input
 from keras.models import Model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from keras import backend as K
 
 batch_size = 128
 num_classes = 10
@@ -39,8 +38,8 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 ip = Input(shape = (1, img_rows, img_cols))
 
 # Creating the forks for first layer
-fork11 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(input)
-fork12 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(input)
+fork11 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(ip)
+fork12 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(ip)
 # Merging and pooling the forks for next layer
 merge1 = merge([fork11, fork12], mode= "concat", concat_axis = 1, name = "merge1")
 maxpool1 = MaxPooling2D(strides = (2,2), border_mode = "same")(merge1)
