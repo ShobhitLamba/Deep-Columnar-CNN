@@ -17,9 +17,9 @@ img_rows, img_cols = 28, 28
 # the data, shuffled and split between train and test sets
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
-x_test = x_test.reshape(x_test.shape[0], 1, img_rows, img_cols)
-input_shape = (1, img_rows, img_cols)
+x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
+x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
+input_shape = (img_rows, img_cols, 1)
 
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
@@ -35,7 +35,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # Building the DCCNN architecture
 # Initializing the network
-ip = Input(shape = (1, img_rows, img_cols))
+ip = Input(shape = input_shape)
 
 # Creating the forks for first layer
 fork11 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(ip)
