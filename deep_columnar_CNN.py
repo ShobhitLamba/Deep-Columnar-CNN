@@ -41,14 +41,14 @@ ip = Input(shape = input_shape)
 fork11 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(ip)
 fork12 = Conv2D(32, 5, 5, activation = "relu", border_mode = "same")(ip)
 # Merging and pooling the forks for next layer
-merge1 = merge([fork11, fork12], mode= "concat", concat_axis = 1, name = "merge1")
+merge1 = merge([fork11, fork12], mode = "concat", concat_axis = 1, name = "merge1")
 maxpool1 = MaxPooling2D(strides = (2,2), border_mode = "same")(merge1)
 
 # Creating the forks for second layer with maxpool1 as input
 fork21 = Conv2D(64, 4, 4, activation = "relu", border_mode = "same")(maxpool1)
 fork22 = Conv2D(64, 4, 4, activation = "relu", border_mode = "same")(maxpool1)
 # Merging and pooling the forks for next layer
-merge2 = merge([fork21, fork22], mode= "concat", concat_axis = 1, name = "merge2")
+merge2 = merge([fork21, fork22], mode = "concat", concat_axis = 1, name = "merge2")
 maxpool2 = MaxPooling2D(strides = (2,2), border_mode = "same")(merge2)
 
 # Creating last fork with maxpool2 as input
@@ -59,7 +59,7 @@ fork34 = Conv2D(128, 3, 3, activation = "relu", border_mode = "same")(maxpool2)
 fork35 = Conv2D(128, 3, 3, activation = "relu", border_mode = "same")(maxpool2)
 fork36 = Conv2D(128, 3, 3, activation = "relu", border_mode = "same")(maxpool2)
 # Merging and pooling the forks for output
-merge3 = merge([fork31, fork32, fork33, fork34, fork35, fork36], mode= "concat", concat_axis = 1, name = "merge3")
+merge3 = merge([fork31, fork32, fork33, fork34, fork35, fork36], mode = "concat", concat_axis = 1, name = "merge3")
 maxpool3 = MaxPooling2D(strides = (2,2), border_mode = "same")(merge3)
 
 # Dropout layer
@@ -75,16 +75,16 @@ model = Model(input = ip, output = op)
 model.summary()
 
 # Compiling the model generated
-model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.Adadelta(),
-              metrics=['accuracy'])
+model.compile(loss = keras.losses.categorical_crossentropy,
+              optimizer = keras.optimizers.Adadelta(),
+              metrics = ['accuracy'])
 
 # Training over training data with test data as validation set
 model.fit(x_train, y_train,
-          batch_size=batch_size,
-          epochs=epochs,
-          verbose=1,
-          validation_data=(x_test, y_test))
+          batch_size = batch_size,
+          epochs = epochs,
+          verbose = 1,
+          validation_data = (x_test, y_test))
 
 # Generating results
 score = model.evaluate(x_test, y_test, verbose=0)
