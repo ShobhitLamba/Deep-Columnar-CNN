@@ -1,4 +1,6 @@
 # Deep Columnar Convolutional Neural Network over MNIST dataset
+# Author: Shobhit Lamba
+# e-mail: slamba4@uic.edu
 
 # Importing the libraries
 import keras
@@ -9,7 +11,7 @@ from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
 batch_size = 128
 num_classes = 10
-epochs = 10
+epochs = 5
 
 # Input image dimensions
 img_rows, img_cols = 28, 28
